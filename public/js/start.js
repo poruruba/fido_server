@@ -32,8 +32,7 @@ var vue_options = {
         start_register: function(){
             this.registered = false;
             var param = {
-                username: this.username,
-                userVerification: true
+                username: this.username
             };
             this.progress_open();
             do_post( base_url + '/attestation/options', param )

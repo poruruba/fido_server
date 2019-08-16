@@ -134,8 +134,6 @@ var vue_options = {
                 if(response.status !== 'ok')
                     throw new Error(`Server responed with error. The message is: ${response.message}`);
 
-                console.log('sendWebAuthnResponse received: ', response);
-
                 if( response.status == 'ok'){
                     this.login_credId = response.credId;
                     this.login_counter = response.counter;

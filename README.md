@@ -1,1 +1,1 @@
-# fido_server
+# Skeleton project for Swagger

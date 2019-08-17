@@ -120,7 +120,6 @@ var vue_options = {
             });
         },
         do_login: function(){
-            console.log(this.assertion);
             return navigator.credentials.get({ publicKey: this.assertion })
             .then(response =>{
                 var result = publicKeyCredentialToJSON(response);

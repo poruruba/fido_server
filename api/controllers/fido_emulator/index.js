@@ -11,7 +11,7 @@ const crypto = require('crypto');
 const curveLength = Math.ceil(256 / 8);
 
 const FIDO_ISSUER = process.env.FIDO_ISSUER || 'FT FIDO 0200';
-const FIDO_SUBJECT = process.env.FIDO_SUBJECT || 'FT FIDO P2047001341412';
+const FIDO_SUBJECT = process.env.FIDO_SUBJECT || 'FT FIDO P2000000000000';
 const FIDO_EXPIRE = Number(process.env.FIDO_EXPIRE) || 365;
 
 var total_counter = Number(process.env.COUNTER_START) || 0;

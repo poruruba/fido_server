@@ -5,10 +5,14 @@ const func_table = {
 //  "test-func" : require('./test_func').handler,
 //  "test-dialogflow" : require('./test_dialogflow').fulfillment,
 
-"attestation-options" : require('./fido').handler,
-"attestation-result" : require('./fido').handler,
-"assertion-options" : require('./fido').handler,
-"assertion-result" : require('./fido').handler,
+"u2f_register" : require('./fido_emulator').handler,
+"u2f_authenticate" : require('./fido_emulator').handler,
+"u2f_version" : require('./fido_emulator').handler,
+
+"attestation-options" : require('./fido_server').handler,
+"attestation-result" : require('./fido_server').handler,
+"assertion-options" : require('./fido_server').handler,
+"assertion-result" : require('./fido_server').handler,
 };
 const alexa_table = {
 //  "test-alexa" : require('./test_alexa').handler,

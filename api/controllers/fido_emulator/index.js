@@ -20,27 +20,30 @@ var total_application_id = Number(process.env.APPLICATION_ID_START) || 1;
 exports.handler = async (event, context, callback) => {
   if( event.path == "/device/u2f_register"){
     var body = JSON.parse(event.body);
+    console.log(body);
     
-    var result = await u2f_register(Buffer.from(body.challenge, 'hex'), Buffer.from(body.application, 'hex'));
-
+    var input = Buffer.from(body.input, 'hex');
+    var result = await u2f_register(input.subarray(7, 7 + 32), input.subarray(7 + 32, 7 + 32 + 32));
+    
     return new Response({
-      result: result.toString('hex')
+      result: Buffer.concat([ result, Buffer.from([0x90, 0x00])]).toString('hex')
     });
   }else
   if( event.path == "/device/u2f_authenticate"){
     var body = JSON.parse(event.body);
+    console.log(body);
 
-    var result = await u2f_authenticate(body.control, Buffer.from(body.challenge, 'hex'), Buffer.from(body.application, 'hex'), Buffer.from(body.key_handle, 'hex'))
+    var input = Buffer.from(body.input, 'hex');
+    var result = await u2f_authenticate(input[2], input.subarray(7, 7 + 32), input.subarray(7 + 32, 7 + 32 + 32), input.subarray(7 + 32 + 32 + 1, 7 + 32 + 32 + 1 + input[7 + 32 + 32]));
 
     return new Response({
-      result: result.toString('hex')
+      result: Buffer.concat([ result, Buffer.from([0x90, 0x00])]).toString('hex')
     });
   }else
   if( event.path == "/device/u2f_version"){
-
     var result = await u2f_version();
     return new Response({
-      result: result.toString('hex')
+      result: Buffer.concat([ result, Buffer.from([0x90, 0x00])]).toString('hex')
     });
   }
 };
@@ -110,7 +113,7 @@ async function u2f_register(challenge, application){
 }
 
 async function u2f_authenticate(control, challenge, application, keyHandle){
-  console.log('control=' + control);
+  console.log('control=', control);
 
   var userPresence = Buffer.from([0x01]);
 

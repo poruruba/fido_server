@@ -87,7 +87,7 @@ async function u2f_register(challenge, application){
   //サブジェクトキー識別子
   var extSKI = new rs.KJUR.asn1.x509.Extension();
   extSKI.oid = '2.5.29.14';
-  const ski = rs.KJUR.crypto.Util.hashHex(kp.pubKeyObj.pubKeyHex, 'sha1');
+  const ski = rs.KJUR.crypto.Util.hashHex(kp_cert.pubKeyObj.pubKeyHex, 'sha1');
   const derSKI = new rs.KJUR.asn1.DEROctetString({ hex: ski });
   extSKI.getExtnValueHex = () => {return derSKI.getEncodedHex() };
   tbsc.appendExtension(extSKI);

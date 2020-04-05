@@ -33,11 +33,11 @@ const char* wifi_password = "【WiFiアクセスポイントのパスワード�
 
 const int capacity = JSON_OBJECT_SIZE(2);
 StaticJsonDocument<capacity> json_request;
-char json_buffer[1024];
+char json_buffer[2048];
 unsigned short recv_len = 0;
 unsigned short expected_len = 0;
 unsigned char expected_slot = 0;
-unsigned char recv_buffer[1024];
+unsigned char recv_buffer[2048];
 
 #define PACKET_BUFFER_SIZE  20
 
@@ -202,7 +202,7 @@ class MyCharacteristicCallbacks : public BLECharacteristicCallbacks{
     if( status_code == 200 ){
       Stream* resp = http.getStreamPtr();
 
-      DynamicJsonDocument json_response(1024);
+      DynamicJsonDocument json_response(2048);
       deserializeJson(json_response, *resp);
 /*
       serializeJson(json_response, Serial);

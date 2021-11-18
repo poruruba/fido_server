@@ -39,7 +39,7 @@ exports.handler = async (event, context, callback) => {
         allowCredentials.push({
           type: 'public-key',
           id: authr.credId,
-          transports: ['usb', 'nfc', 'ble']
+//          transports: ['usb', 'nfc', 'ble']
         })
     }
     authnOptions.allowCredentials = allowCredentials;

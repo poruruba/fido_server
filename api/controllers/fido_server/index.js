@@ -69,6 +69,11 @@ exports.handler = async (event, context, callback) => {
         'message': 'key is not found.'
       });
     }
+    
+    if( !context.req.session.challenge ){
+      console.error("session is not enabled");
+      throw "session is not enabled";      
+    }
 
     var assertionExpectations = {
       challenge: context.req.session.challenge,
